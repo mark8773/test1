@@ -3,7 +3,7 @@ apt update
 apt upgrade -y
 apt install libxcb* -y
 apt install xcb* -y
-apt install git meson ninja libarchive -y
+apt install git meson ninja-build libarchive-dev -y
 git clone https://gitlab.freedesktop.org/Pipetto-crypto/mesa.git --branch winlator
 apt-get build-dep mesa -y
 cd mesa
