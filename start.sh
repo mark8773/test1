@@ -1,3 +1,4 @@
-sudo apt update
-sudo apt upgrade -y
-sudo apt-get build-dep mesa
+apt update
+apt upgrade -y
+apt-get build-dep mesa
+uname -m
