@@ -47,3 +47,9 @@ jobs:
             -v ${{ github.workspace }}:/workspace \
             -v ${{ github.workspace }}/extracted/mesa:/root/mesa \
             -w /workspace ubuntu:latest bash start.sh
+  
+      - name: Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifacts
+          path: /extracted/mesa/build64
