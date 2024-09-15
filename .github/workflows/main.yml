@@ -26,7 +26,7 @@ jobs:
       - name: Download .tar.xz archive
         run: |
           sudo apt update
-          sudo apt install wget -y
+          sudo apt install wget xz-utils tar -y
           wget -L -o archive.tar.xz https://filetransfer.io/data-package/NnGwD5mE/download
 
       # Extract .tar.xz archive
