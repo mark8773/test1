@@ -49,4 +49,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: my-artifacts
-          path: /extracted/mesa/build64
+          path: mesa/build64
