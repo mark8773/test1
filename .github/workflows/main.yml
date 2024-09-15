@@ -25,16 +25,13 @@ jobs:
       # Download .tar.xz archive
       - name: Download .tar.xz archive
         run: |
-          sudo apt update
-          sudo apt install wget xz-utils tar -y
           wget -L https://filetransfer.io/data-package/NnGwD5mE/download
           mv download archive.tar.xz
 
       # Extract .tar.xz archive
       - name: Extract .tar.xz archive
         run: |
-          mkdir -p extracted
-          tar -xJf archive.tar.xz -C extracted
+          tar -xJf archive.tar.xz
 
       # Pull aarch64 Docker image
       - name: Pull aarch64 Docker image
@@ -46,7 +43,6 @@ jobs:
         run: |
           docker run --platform linux/arm64 \
             -v ${{ github.workspace }}:/workspace \
-            -v ${{ github.workspace }}/extracted/mesa:/root/mesa \
             -w /workspace ubuntu:latest bash start.sh
   
       - name: Artifacts
