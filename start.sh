@@ -10,6 +10,6 @@ cd mesa
 #git checkout d055edac11cf89e0f326e1761fc6ed44d87981f6
 wget -O 1.patch https://github.com/user-attachments/files/17239223/dri3.patch.txt
 git apply -v 1.patch
-meson setup build -Dplatforms=x11 -Dgallium-drivers= -Dfreedreno-kmds=kgsl,msm -Dvulkan-drivers=freedreno -Degl=disabled -Dgles2=disabled -Dglvnd=disabled -Dglx=disabled -Dlibunwind=disabled -Ddri3=enabled -Dshared-glapi=disabled -Dshared-llvm=disabled -Dmicrosoft-clc=disabled -Dvalgrind=disabled -Dgles1=disabled
+meson setup build -Dplatforms=x11 -Dgallium-drivers= -Dfreedreno-kmds=kgsl,msm -Dvulkan-drivers=freedreno -Degl=disabled -Dgles2=disabled -Dglvnd=disabled -Dglx=disabled -Dlibunwind=disabled -Dshared-glapi=disabled -Dshared-llvm=disabled -Dmicrosoft-clc=disabled -Dvalgrind=disabled -Dgles1=disabled
 DESTDIR="$PWD/build64/release" ninja -C build install
 tar -cvf build64.tar build64
