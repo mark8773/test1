@@ -5,8 +5,9 @@ apt install libxcb* -y
 apt install xcb* -y
 apt install meson ninja-build libarchive-dev tar wget git -y
 apt-get build-dep mesa -y
-git clone -b d055edac11cf89e0f326e1761fc6ed44d87981f6 https://gitlab.freedesktop.org/mesa/mesa
+git clone https://gitlab.freedesktop.org/mesa/mesa
 cd mesa
+git checkout d055edac11cf89e0f326e1761fc6ed44d87981f6
 wget -O 1.patch https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/refs/heads/main/turnip-patches/dri3.patch
 git apply -v 1.patch
 exit
