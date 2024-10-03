@@ -1,6 +1,15 @@
-sudo cat /etc/apt/sources.list
-exit
-sudo echo -e "\nTypes: deb-src\nURIs: http://ports.ubuntu.com/ubuntu-ports/\nSuites: noble noble-updates noble-backports\nComponents: main universe restricted multiverse\nSigned-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg" >> /etc/apt/sources.list.d/ubuntu.sources
+sudo bash -c 'echo "
+deb-src mirror+file:/etc/apt/apt-mirrors.txt jammy main restricted
+deb-src mirror+file:/etc/apt/apt-mirrors.txt jammy-updates main restricted
+deb-src mirror+file:/etc/apt/apt-mirrors.txt jammy universe
+deb-src mirror+file:/etc/apt/apt-mirrors.txt jammy-updates universe
+deb-src mirror+file:/etc/apt/apt-mirrors.txt jammy multiverse
+deb-src mirror+file:/etc/apt/apt-mirrors.txt jammy-updates multiverse
+deb-src mirror+file:/etc/apt/apt-mirrors.txt jammy-backports main restricted universe multiverse
+deb-src mirror+file:/etc/apt/apt-mirrors.txt jammy-security main restricted
+deb-src mirror+file:/etc/apt/apt-mirrors.txt jammy-security universe
+deb-src mirror+file:/etc/apt/apt-mirrors.txt jammy-security multiverse
+" >> /etc/apt/sources.list'
 sudo apt update
 sudo apt upgrade -y
 sudo apt install libxcb* -y
