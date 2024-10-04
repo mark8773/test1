@@ -7,9 +7,9 @@ apt install meson ninja-build libarchive-dev tar wget git -y
 apt-get build-dep mesa -y
 git clone https://gitlab.freedesktop.org/mesa/mesa
 cd mesa
-git checkout e2388350f2d5b3aaa5f004c9f97b120a76666d3e
-wget -O 1.patch https://github.com/user-attachments/files/17239223/dri3.patch.txt
+git checkout d055edac11cf89e0f326e1761fc6ed44d87981f6
+wget -O 1.patch https://github.com/alexvorxx/Zink-Mesa-Xlib/releases/download/v0.0.7/04-wsi-termux-x11-only-kgsl_fix2.patch
 git apply -v 1.patch
-meson setup build -Dplatforms=x11 -Dgallium-drivers= -Dfreedreno-kmds=kgsl,msm -Dvulkan-drivers=freedreno -Ddri3=enabled -Degl=disabled -Dgles2=disabled -Dglvnd=disabled -Dglx=disabled -Dlibunwind=disabled -Dshared-glapi=disabled -Dshared-llvm=disabled -Dmicrosoft-clc=disabled -Dvalgrind=disabled -Dgles1=disabled
+meson setup build -Dplatforms=x11 -Dgallium-drivers= -Dfreedreno-kmds=kgsl -Dvulkan-drivers=freedreno -Ddri3=enabled -Degl=disabled -Dgles2=disabled -Dglvnd=disabled -Dglx=disabled -Dlibunwind=disabled -Dshared-glapi=disabled -Dshared-llvm=disabled -Dmicrosoft-clc=disabled -Dvalgrind=disabled -Dgles1=disabled
 DESTDIR="$PWD/build64/release" ninja -C build install
 tar -cvf build64.tar build64
