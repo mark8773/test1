@@ -5,11 +5,17 @@ apt install libxcb* -y
 apt install xcb* -y
 apt install meson ninja-build libarchive-dev tar wget git -y
 apt-get build-dep mesa -y
-git clone -b winlator_wsi-termux-x11 https://gitlab.freedesktop.org/Pipetto-crypto/mesa
+git clone https://gitlab.freedesktop.org/mesa/mesa
 cd mesa
-git checkout 70176295bf7a4c582a8fb263f9d58e5106851c8f
-#wget -O 1.patch https://github.com/alexvorxx/Zink-Mesa-Xlib/releases/download/v0.0.7/04-wsi-termux-x11-only-kgsl_fix2.patch
-#git apply -v 1.patch
+git checkout ed2ec808b1a581cbe875a18e4a3a44e0dcbd26c0
+wget -O 1.patch https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/refs/heads/main/turnip-patches/fix-for-anon-file.patch
+wget -O 2.patch https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/refs/heads/main/turnip-patches/fix-for-getprogname.patch
+wget -O 3.patch https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/refs/heads/main/turnip-patches/zink_fixes.patch
+wget -O 4.patch https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/refs/heads/main/turnip-patches/dri3.patch
+git apply -v 1.patch
+git apply -v 2.patch
+git apply -v 3.patch
+git apply -v 4.patch
 meson setup build -Dplatforms=x11 -Dgallium-drivers= -Dfreedreno-kmds=kgsl -Dvulkan-drivers=freedreno -Ddri3=enabled -Degl=disabled -Dgles2=disabled -Dglvnd=disabled -Dglx=disabled -Dlibunwind=disabled -Dshared-glapi=disabled -Dshared-llvm=disabled -Dmicrosoft-clc=disabled -Dvalgrind=disabled -Dgles1=disabled
 DESTDIR="$PWD/build64/release" ninja -C build install
 tar -cvf build64.tar build64
