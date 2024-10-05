@@ -3,8 +3,16 @@ apt update
 apt upgrade -y
 apt install libxcb* -y
 apt install xcb* -y
-apt install meson ninja-build libarchive-dev tar wget git -y
+apt install meson ninja-build libarchive-dev tar wget git cmake -y
 apt-get build-dep mesa -y
+git clone https://github.com/llvm/llvm-project.git
+cd llvm-project/llvm
+mkdir build
+cd build
+cmake -G Ninja -DLLVM_ENABLE_RTTI=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_SKIP_RPATH=ON -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_USE_PERF=ON ../
+ninja
+ninja install
+cd
 git clone https://gitlab.freedesktop.org/mesa/mesa
 cd mesa
 git checkout ed2ec808b1a581cbe875a18e4a3a44e0dcbd26c0
