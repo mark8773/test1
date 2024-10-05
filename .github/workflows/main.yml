@@ -22,17 +22,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # Download .tar.xz archive
-      - name: Download .tar.xz archive
-        run: |
-          wget -L https://filetransfer.io/data-package/NnGwD5mE/download
-          mv download archive.tar.xz
-
-      # Extract .tar.xz archive
-      - name: Extract .tar.xz archive
-        run: |
-          tar -xJf archive.tar.xz
-
       # Pull aarch64 Docker image
       - name: Pull aarch64 Docker image
         run: |
