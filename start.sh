@@ -20,4 +20,6 @@ wget -O 1.patch https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/e31c35e
 git apply -v 1.patch
 meson setup build -Dplatforms=x11 -Dgallium-drivers= -Dfreedreno-kmds=kgsl,msm -Dvulkan-drivers=freedreno -Ddri3=enabled -Degl=disabled -Dgles2=disabled -Db_lto=true -Dcpp_rtti=false -Dglvnd=disabled -Dglx=disabled -Dlibunwind=disabled -Dshared-glapi=disabled -Dshared-llvm=disabled -Dmicrosoft-clc=disabled -Dvalgrind=disabled -Dgles1=disabled
 DESTDIR="$PWD/build64/release" ninja -C build install
+sleep 5
 tar -cvf build64.tar build64
+sleep 5
