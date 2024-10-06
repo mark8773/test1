@@ -1,27 +1,22 @@
-name: ARM64 macOS Docker Workflow
+name: Build Ubuntu ARM64 Chroot
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: macos-13
+    runs-on: macos-13-arm64
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v2
-        with:
-          buildkitd-flags: --allow-insecure-entitlement network.host
-
-      - name: Pull ARM64 Ubuntu Docker image
+      - name: Install necessary packages
         run: |
-          docker pull arm64v8/ubuntu
+          brew install debootstrap
+          sudo mkdir -p /path/to/chroot
+          sudo debootstrap --arch=arm64 focal /path/to/chroot http://archive.ubuntu.com/ubuntu/
 
-      - name: Run Ubuntu in Docker
+      - name: Enter chroot and run uname
         run: |
-          docker run --rm arm64v8/ubuntu uname -a
+          sudo chroot /path/to/chroot /bin/bash -c 'uname -a'
