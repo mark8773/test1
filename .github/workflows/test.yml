@@ -1,0 +1,22 @@
+name: ARM64 macOS Docker Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-13
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        run: |
+          docker pull arm64v8/ubuntu
+
+      - name: Run Ubuntu in Docker
+        run: |
+          docker run --rm arm64v8/ubuntu uname -a
