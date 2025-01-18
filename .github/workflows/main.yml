@@ -15,8 +15,8 @@ jobs:
       # Download .tar.xz archive
       - name: Download .tar.xz archive
         run: |
-          apt update && apt upgrade
-          apt install git
+          sudo apt update && sudo apt upgrade
+          sudo apt install git
 
       # Extract .tar.xz archive
       - name: Extract .tar.xz archive
