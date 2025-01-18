@@ -3,23 +3,9 @@ apt update
 apt upgrade -y
 apt install libxcb* -y
 apt install xcb* -y
-apt install meson ninja-build libarchive-dev tar wget git cmake -y
+apt install meson ninja-build libarchive-dev tar -y
 apt-get build-dep mesa -y
-git clone https://github.com/llvm/llvm-project.git
-cd llvm-project/llvm
-mkdir build
-cd build
-cmake -G Ninja -DLLVM_ENABLE_RTTI=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_SKIP_RPATH=ON -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_USE_PERF=ON ../
-ninja
-ninja install
-cd
-git clone https://gitlab.freedesktop.org/mesa/mesa
 cd mesa
-git checkout ed2ec808b1a581cbe875a18e4a3a44e0dcbd26c0
-wget -O 1.patch https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/e31c35e9c46e510c2445c884da194c51f4eb2abe/turnip-patches/dri3.patch
-git apply -v 1.patch
-meson setup build -Dplatforms=x11 -Dgallium-drivers= -Dfreedreno-kmds=kgsl,msm -Dvulkan-drivers=freedreno -Ddri3=enabled -Degl=disabled -Dgles2=disabled -Db_lto=true -Dcpp_rtti=false -Dglvnd=disabled -Dglx=disabled -Dlibunwind=disabled -Dshared-glapi=disabled -Dshared-llvm=disabled -Dmicrosoft-clc=disabled -Dvalgrind=disabled -Dgles1=disabled
+meson build -Dplatforms=x11 -Dgallium-drivers= -Dfreedreno-kmds=kgsl,msm -Dvulkan-drivers=freedreno -D dri3=enabled -D egl=disabled -D gles2=disabled -D glvnd=disabled -D glx=disabled -D libunwind=disabled -D shared-glapi=disabled -Dshared-llvm=disabled -D microsoft-clc=disabled -D valgrind=disabled -D gles1=disabled
 DESTDIR="$PWD/build64/release" ninja -C build install
-sleep 5
 tar -cvf build64.tar build64
-sleep 5
