@@ -5,48 +5,30 @@ on:
 
 jobs:
   run-docker:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
 
     steps:
       # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Download mesa and llvm
+      # Download .tar.xz archive
+      - name: Download .tar.xz archive
         run: |
-          sudo apt update
-          sudo apt install git -y
-          git clone https://gitlab.freedesktop.org/mesa/mesa
-          cd mesa
-          git checkout ed2ec808b1a581cbe875a18e4a3a44e0dcbd26c0
-          wget -O 1.patch https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/e31c35e9c46e510c2445c884da194c51f4eb2abe/turnip-patches/dri3.patch
-          git apply -v 1.patch
-          cd
-          wget llv
+          apt update && apt upgrade
+          apt install git
 
-
-      # Set up QEMU
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-        with:
-          platforms: arm64
-
-      # Set up Docker Buildx
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      # Pull aarch64 Docker image
-      - name: Pull aarch64 Docker image
+      # Extract .tar.xz archive
+      - name: Extract .tar.xz archive
         run: |
-          docker pull --platform linux/arm64 ubuntu:latest
+          git clone https://gitlab.freedesktop.org/mesa/mesa.git
 
-      # Run Docker container and execute start.sh
-      - name: Run Docker container and execute start.sh
+      
+      - name: start.sh
         run: |
-          docker run --platform linux/arm64 \
-            -v ${{ github.workspace }}:/workspace \
-            -w /workspace ubuntu:latest bash start.sh
-  
+          chmod +x start.sh
+          ./start.sh
+
       - name: Artifacts
         uses: actions/upload-artifact@v4
         with:
