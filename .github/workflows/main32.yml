@@ -23,7 +23,7 @@ jobs:
           sudo apt install git wget -y
           git clone https://gitlab.freedesktop.org/mesa/mesa.git
           cd mesa
-          git switch b339c525f449f19f6515201509d8a7455d239195
+          git checkout b339c525f449f19f6515201509d8a7455d239195
           wget https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/bdfc14a2aaf152cc5f72b171f6c54f04ac3032b5/turnip-patches/dri3.patch
           git apply -v dri3.patch
 
