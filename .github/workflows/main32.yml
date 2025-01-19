@@ -16,6 +16,17 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+
+      - name: clone git
+        run: |
+          sudo apt update
+          sudo apt install git wget -y
+          git clone https://gitlab.freedesktop.org/mesa/mesa.git
+          cd mesa
+          git switch b339c525f449f19f6515201509d8a7455d239195
+          wget https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/bdfc14a2aaf152cc5f72b171f6c54f04ac3032b5/turnip-patches/dri3.patch
+          git apply -v dri3.patch
+
       # Pull armhf Docker image
       - name: Pull armhf Docker image
         run: |
