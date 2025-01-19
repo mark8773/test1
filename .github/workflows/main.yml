@@ -5,30 +5,29 @@ on:
 
 jobs:
   run-docker:
-    runs-on: ubuntu-22.04-arm
+    runs-on: ubuntu-24.04-arm
 
     steps:
       # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Download .tar.xz archive
-      - name: Download .tar.xz archive
-        run: |
-          sudo apt update && sudo apt upgrade
-          sudo apt install git
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-      # Extract .tar.xz archive
-      - name: Extract .tar.xz archive
+      # Pull aarch64 Docker image
+      - name: Pull aarch64 Docker image
         run: |
-          git clone https://gitlab.freedesktop.org/mesa/mesa.git
+          docker pull --platform linux/arm64 ubuntu:latest
 
-      
-      - name: start.sh
+      # Run Docker container and execute start.sh
+      - name: Run Docker container and execute start.sh
         run: |
-          chmod +x start.sh
-          ./start.sh
-
+          docker run --platform linux/arm64 \
+            -v ${{ github.workspace }}:/workspace \
+            -w /workspace ubuntu:latest bash start.sh
+  
       - name: Artifacts
         uses: actions/upload-artifact@v4
         with:
