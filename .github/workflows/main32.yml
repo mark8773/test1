@@ -24,7 +24,7 @@ jobs:
           git clone https://gitlab.freedesktop.org/mesa/mesa.git
           cd mesa
           git checkout a512c2a8b572c5da360873320dbbd343c6223cd6
-          wget https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/e31c35e9c46e510c2445c884da194c51f4eb2abe/turnip-patches/dri3.patch
+          wget https://raw.githubusercontent.com/termux-pacman/glibc-packages/4796bfee82b6ec47450e7db82ab12ec9d6dd7c09/gpkg/mesa/wsi-termux-x11-v3.patch
           wget https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/e31c35e9c46e510c2445c884da194c51f4eb2abe/turnip-patches/fix-for-getprogname.patch
           wget https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/e31c35e9c46e510c2445c884da194c51f4eb2abe/turnip-patches/fix-for-anon-file.patch
           git apply -v dri3.patch
