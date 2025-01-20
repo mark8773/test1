@@ -5,7 +5,7 @@ on:
 
 jobs:
   run-docker:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-22.04-arm
 
     steps:
       # Checkout repository
@@ -30,14 +30,14 @@ jobs:
       # Pull armhf Docker image
       - name: Pull armhf Docker image
         run: |
-          docker pull --platform linux/arm/v7 ubuntu:latest
+          docker pull --platform linux/arm/v7 ubuntu:22.04
 
       # Run Docker container and execute start.sh
       - name: Run Docker container and execute start.sh
         run: |
           docker run --platform linux/arm/v7 \
             -v ${{ github.workspace }}:/workspace \
-            -w /workspace ubuntu:latest bash start.sh
+            -w /workspace ubuntu:22.04 bash start.sh
   
       - name: Artifacts
         uses: actions/upload-artifact@v4
