@@ -5,7 +5,7 @@ on:
 
 jobs:
   run-docker:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-22.04-arm
 
     steps:
       # Checkout repository
@@ -23,10 +23,10 @@ jobs:
           sudo apt install git wget -y
           git clone https://gitlab.freedesktop.org/mesa/mesa.git
           cd mesa
-          git checkout 323b59a5b5580b99f057b0c8a69e377289b0b45d
-          wget https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/refs/heads/main/turnip-patches/dri3.patch
-          wget https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/refs/heads/main/turnip-patches/fix-for-getprogname.patch
-          wget https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/refs/heads/main/turnip-patches/fix-for-anon-file.patch
+          git checkout a512c2a8b572c5da360873320dbbd343c6223cd6
+          wget https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/e31c35e9c46e510c2445c884da194c51f4eb2abe/turnip-patches/dri3.patch
+          wget https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/e31c35e9c46e510c2445c884da194c51f4eb2abe/turnip-patches/fix-for-getprogname.patch
+          wget https://raw.githubusercontent.com/MastaG/mesa-turnip-ppa/e31c35e9c46e510c2445c884da194c51f4eb2abe/turnip-patches/fix-for-anon-file.patch
           git apply -v dri3.patch
           git apply -v fix-for-getprogname.patch
           git apply -v fix-for-anon-file.patch
@@ -34,14 +34,14 @@ jobs:
       # Pull armhf Docker image
       - name: Pull armhf Docker image
         run: |
-          docker pull --platform linux/arm/v7 ubuntu:24.04
+          docker pull --platform linux/arm/v7 ubuntu:22.04
 
       # Run Docker container and execute start.sh
       - name: Run Docker container and execute start.sh
         run: |
           docker run --platform linux/arm/v7 \
             -v ${{ github.workspace }}:/workspace \
-            -w /workspace ubuntu:24.04 bash start.sh
+            -w /workspace ubuntu:22.04 bash start.sh
   
       - name: Artifacts
         uses: actions/upload-artifact@v4
